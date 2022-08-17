@@ -32,14 +32,14 @@ const onFormSubmit = (evt) => {
   formData.forEach((value, name) => feedbackFormData[name] = value);
 
   console.log(feedbackFormData);
-  
+
   evt.currentTarget.reset();
   localStorage.removeItem(STORAGE_FORM_DATA);
 }
 
 const onFormInput = evt => {
   const savedUserFeedback = localStorage.getItem(STORAGE_FORM_DATA);
-  let feedbackFormData = savedUserFeedback ? JSON.parse(savedUserFeedback) : {};
+  feedbackFormData = savedUserFeedback ? JSON.parse(savedUserFeedback) : {};
   feedbackFormData[evt.target.name] = evt.target.value;
   localStorage.setItem(STORAGE_FORM_DATA, JSON.stringify(feedbackFormData));
 };
