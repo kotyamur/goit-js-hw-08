@@ -13,19 +13,7 @@ const onTimeupdate = (data) => {
 }
 player.on('timeupdate', throttle(onTimeupdate, 1000));
 
-player
-  .setCurrentTime(localStorage.getItem(STORAGE_TIME))
-  .then((seconds) => {
-    console.log(seconds);
-  })
-  .catch((error) => {
-    switch (error.name) {
-      case 'RangeError':
-        console.log(error.name, error.method, error.message);
-        break;
-
-      default:
-        console.log(error.name, error.method, error.message);
-        break;
-    }
-  });
+const savedTime = localStorage.getItem(STORAGE_TIME);
+if (savedTime) {
+  player.setCurrentTime(savedTime);
+}

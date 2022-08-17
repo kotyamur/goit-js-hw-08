@@ -35,8 +35,6 @@ const onFormSubmit = (evt) => {
 }
 
 const onFormInput = evt => {
-  evt.preventDefault();
-
   feedbackFormData[evt.target.name] = evt.target.value;
   localStorage.setItem(STORAGE_FORM_DATA, JSON.stringify(feedbackFormData));
 };
