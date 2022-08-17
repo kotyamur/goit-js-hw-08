@@ -4,15 +4,13 @@ const STORAGE_FORM_DATA = 'feedback-form-state';
 
 const userFeedbackForm = document.querySelector('.feedback-form');
 
-let feedbackFormData = {};
-
 const renovateUserInfo = () => {
   const savedUserFeedback = localStorage.getItem(STORAGE_FORM_DATA);
-  
+
   if (savedUserFeedback) {
     try {
       const parsedUserFeedback = JSON.parse(savedUserFeedback);
-      
+
       Object.entries(parsedUserFeedback).forEach(([name, value]) => {
         userFeedbackForm.elements[name].value = value;
       });
@@ -21,25 +19,24 @@ const renovateUserInfo = () => {
       console.log(error.message); // "Unexpected token u in JSON at position 1"
     }
   }
-}
+};
 
 renovateUserInfo();
 
-const onFormSubmit = (evt) => {
+const onFormSubmit = evt => {
   evt.preventDefault();
-  
-  const formData = new FormData(userFeedbackForm);
-  formData.forEach((value, name) => feedbackFormData[name] = value);
 
-  console.log(feedbackFormData);
+  console.log(JSON.parse(localStorage.getItem(STORAGE_FORM_DATA)));
 
   evt.currentTarget.reset();
   localStorage.removeItem(STORAGE_FORM_DATA);
-}
+};
 
 const onFormInput = evt => {
   const savedUserFeedback = localStorage.getItem(STORAGE_FORM_DATA);
-  feedbackFormData = savedUserFeedback ? JSON.parse(savedUserFeedback) : {};
+  const feedbackFormData = savedUserFeedback
+    ? JSON.parse(savedUserFeedback)
+    : {};
   feedbackFormData[evt.target.name] = evt.target.value;
   localStorage.setItem(STORAGE_FORM_DATA, JSON.stringify(feedbackFormData));
 };
