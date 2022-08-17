@@ -40,4 +40,4 @@ const onFormInput = evt => {
 };
 
 userFeedbackForm.addEventListener('submit', onFormSubmit);
-userFeedbackForm.addEventListener('input', throttle(onFormInput, 500));
+userFeedbackForm.addEventListener('change', throttle(onFormInput, 500));
